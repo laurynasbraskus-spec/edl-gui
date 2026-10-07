@@ -1,0 +1,125 @@
+/* EDL GUI components. Plain CSS over the tokens (tokens.css); no framework.
+   Every class is prefixed edl-. Colors come only from token variables. */
+@import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600&family=IBM+Plex+Sans:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap");
+
+.edl-root {
+  background: var(--mask-900);
+  color: var(--silk);
+  font: 400 14px/20px var(--font-sans, "IBM Plex Sans", system-ui, sans-serif);
+}
+
+/* Button */
+.edl-btn {
+  display: inline-flex; align-items: center; gap: var(--space-1, 4px);
+  height: 32px; padding: 0 var(--space-4, 16px);
+  border: 1px solid var(--trace); border-radius: var(--radius-md, 4px);
+  background: transparent; color: var(--silk);
+  font: 600 14px/20px var(--font-sans, "IBM Plex Sans", system-ui, sans-serif);
+  cursor: pointer;
+}
+.edl-btn:hover { background: var(--mask-600); }
+.edl-btn:focus-visible { outline: 2px solid var(--copper); outline-offset: 2px; }
+.edl-btn--primary { background: var(--copper); border-color: var(--copper); color: var(--on-copper); }
+.edl-btn--primary:hover { background: var(--copper); filter: brightness(1.08); }
+.edl-btn--danger { border-color: var(--signal-fault); color: var(--signal-fault); }
+.edl-btn--danger:hover { background: var(--mask-600); }
+.edl-btn--danger.edl-btn--solid { background: var(--signal-fault); color: var(--mask-800); }
+.edl-btn:disabled, .edl-btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; filter: none; }
+
+/* Field: label + input or select */
+.edl-field { display: flex; flex-direction: column; gap: var(--space-1, 4px); min-width: 0; }
+.edl-label {
+  font: 600 11px/16px var(--font-sans, "IBM Plex Sans", system-ui, sans-serif);
+  letter-spacing: .08em; text-transform: uppercase; color: var(--silk-muted);
+}
+.edl-input {
+  height: 32px; padding: 0 var(--space-2, 8px); min-width: 0;
+  border: 1px solid var(--trace); border-radius: var(--radius-md, 4px);
+  background: var(--mask-900); color: var(--silk);
+  font: 400 13px/18px var(--font-mono, "JetBrains Mono", ui-monospace, monospace);
+}
+.edl-input:focus { outline: 2px solid var(--copper); outline-offset: 0; border-color: var(--copper); }
+.edl-input[aria-invalid="true"] { border-color: var(--signal-fault); }
+.edl-hint { font-size: 12px; line-height: 16px; color: var(--silk-muted); }
+.edl-hint--fault { color: var(--signal-fault); }
+
+/* Status chip: device and job state */
+.edl-chip {
+  display: inline-flex; align-items: center; gap: var(--space-1, 4px);
+  height: 22px; padding: 0 var(--space-2, 8px);
+  border: 1px solid var(--mask-600); border-radius: var(--radius-sm, 2px);
+  font: 600 11px/16px var(--font-sans, "IBM Plex Sans", system-ui, sans-serif);
+  letter-spacing: .08em; text-transform: uppercase; color: var(--silk-muted);
+}
+.edl-chip::before { content: ""; width: 8px; height: 8px; border-radius: 1px; background: var(--silk-muted); }
+.edl-chip--ok { color: var(--signal-ok); border-color: var(--signal-ok); }
+.edl-chip--ok::before { background: var(--signal-ok); }
+.edl-chip--warn { color: var(--signal-warn); border-color: var(--signal-warn); }
+.edl-chip--warn::before { background: var(--signal-warn); transform: rotate(45deg); }
+.edl-chip--fault { color: var(--signal-fault); border-color: var(--signal-fault); }
+.edl-chip--fault::before { background: var(--signal-fault); width: 9px; height: 3px; }
+
+/* Panel */
+.edl-panel {
+  background: var(--mask-800); border: 1px solid var(--mask-600);
+  border-radius: var(--radius-lg, 8px); min-width: 0;
+}
+.edl-panel__head {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-2, 8px);
+  padding: var(--space-2, 8px) var(--space-4, 16px); border-bottom: 1px solid var(--mask-600);
+}
+.edl-panel__title { margin: 0; font: 600 18px/24px var(--font-display, "Chakra Petch", system-ui, sans-serif); }
+.edl-panel__body { padding: var(--space-4, 16px); }
+
+/* Key/value list (device card) */
+.edl-kv { display: grid; grid-template-columns: max-content 1fr; gap: var(--space-2, 8px) var(--space-4, 16px); margin: 0; }
+.edl-kv dt { font: 600 11px/18px var(--font-sans, "IBM Plex Sans", system-ui, sans-serif); letter-spacing: .08em; text-transform: uppercase; color: var(--silk-muted); }
+.edl-kv dd { margin: 0; min-width: 0; overflow-wrap: anywhere; font: 400 13px/18px var(--font-mono, "JetBrains Mono", ui-monospace, monospace); font-variant-numeric: tabular-nums; }
+
+/* Partition table */
+.edl-table-wrap { overflow-x: auto; }
+.edl-table { width: 100%; border-collapse: collapse; font: 400 13px/18px var(--font-mono, "JetBrains Mono", ui-monospace, monospace); font-variant-numeric: tabular-nums; }
+.edl-table th {
+  text-align: left; padding: var(--space-2, 8px); border-bottom: 1px solid var(--mask-600);
+  font: 600 11px/16px var(--font-sans, "IBM Plex Sans", system-ui, sans-serif); letter-spacing: .08em; text-transform: uppercase; color: var(--silk-muted);
+}
+.edl-table td { padding: var(--space-2, 8px); border-bottom: 1px solid var(--mask-600); white-space: nowrap; }
+.edl-table .num { text-align: right; }
+.edl-table tbody tr:hover { background: var(--mask-900); }
+.edl-table tr[aria-selected="true"] td { box-shadow: inset 0 2px 0 var(--copper), inset 0 -2px 0 var(--copper); }
+.edl-table tr[aria-selected="true"] td:first-child { box-shadow: inset 2px 2px 0 var(--copper), inset 0 -2px 0 var(--copper); }
+.edl-table tr[aria-selected="true"] td:last-child { box-shadow: inset -2px 2px 0 var(--copper), inset 0 -2px 0 var(--copper); }
+.edl-table .protected { color: var(--signal-warn); }
+
+/* Progress */
+.edl-progress { display: flex; flex-direction: column; gap: var(--space-1, 4px); }
+.edl-progress__meta { display: flex; justify-content: space-between; gap: var(--space-2, 8px); font: 400 12px/16px var(--font-mono, "JetBrains Mono", ui-monospace, monospace); font-variant-numeric: tabular-nums; color: var(--silk-muted); }
+.edl-progress__meta strong { color: var(--silk); font-weight: 600; }
+.edl-progress__track { height: 8px; border-radius: var(--radius-sm, 2px); background: var(--mask-600); overflow: hidden; }
+.edl-progress__fill { height: 100%; background: var(--copper); }
+.edl-progress--ok .edl-progress__fill { background: var(--signal-ok); }
+.edl-progress--fault .edl-progress__fill { background: var(--signal-fault); }
+
+/* Log console */
+.edl-log {
+  display: flex; flex-direction: column;
+  margin: 0; padding: var(--space-2, 8px) var(--space-4, 16px); max-height: 240px; overflow: auto;
+  background: var(--mask-900); border: 1px solid var(--mask-600); border-radius: var(--radius-md, 4px);
+  font: 400 12px/18px var(--font-mono, "JetBrains Mono", ui-monospace, monospace); font-variant-numeric: tabular-nums;
+  color: var(--silk-muted);
+}
+.edl-log__line { display: grid; grid-template-columns: 9ch 9ch 1fr; gap: var(--space-2, 8px); white-space: pre-wrap; }
+.edl-log__layer { color: var(--silk); }
+.edl-log__line--warn { color: var(--signal-warn); }
+.edl-log__line--fault { color: var(--signal-fault); }
+.edl-log__line--ok { color: var(--signal-ok); }
+
+/* Confirm bar: destructive action confirmed in place */
+.edl-confirm {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2, 8px) var(--space-4, 16px);
+  padding: var(--space-2, 8px) var(--space-4, 16px);
+  background: var(--mask-800); border: 1px solid var(--signal-fault); border-radius: var(--radius-md, 4px);
+}
+.edl-confirm__text { flex: 1 1 240px; min-width: 0; }
+.edl-confirm__text code { font: 600 13px/18px var(--font-mono, "JetBrains Mono", ui-monospace, monospace); }
+.edl-confirm__actions { display: flex; gap: var(--space-2, 8px); }

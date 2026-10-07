@@ -1,0 +1,105 @@
+/* EDL GUI tokens. Generated from tokens.json by build_tokens.py; do not edit. */
+
+:root, [data-theme="bench"] {
+  --mask-900: #0f1a16;
+  --mask-800: #16251f;
+  --mask-600: #2c4339;
+  --trace: #5e7a6d;
+  --silk: #e8efe9;
+  --silk-muted: #9fb3a8;
+  --copper: #d08a4e;
+  --on-copper: var(--mask-900);
+  --signal-ok: #5fcf8a;
+  --signal-warn: #e8c25a;
+  --signal-fault: #f0766b;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="bench"]) {
+    --mask-900: #e9eee9;
+    --mask-800: #f8faf7;
+    --mask-600: #cdd8d0;
+    --trace: #6b8679;
+    --silk: #14211b;
+    --silk-muted: #4a6054;
+    --copper: #a35a22;
+    --on-copper: var(--mask-800);
+    --signal-ok: #1d7343;
+    --signal-warn: #946d00;
+    --signal-fault: #8f2219;
+    color-scheme: light;
+  }
+}
+
+[data-theme="board"] {
+  --mask-900: #e9eee9;
+  --mask-800: #f8faf7;
+  --mask-600: #cdd8d0;
+  --trace: #6b8679;
+  --silk: #14211b;
+  --silk-muted: #4a6054;
+  --copper: #a35a22;
+  --on-copper: var(--mask-800);
+  --signal-ok: #1d7343;
+  --signal-warn: #946d00;
+  --signal-fault: #8f2219;
+  color-scheme: light;
+}
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --font-display: "Chakra Petch", "Segoe UI", system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+
+.edl-type-display {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 600;
+}
+
+.edl-type-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.edl-type-body {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.edl-type-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.edl-type-mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.edl-type-log {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+}

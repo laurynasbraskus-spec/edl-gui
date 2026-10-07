@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EDL GUI components</title>
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="components.css">
+<style>
+  body { margin: 0; }
+  .demo { display: flex; flex-direction: column; gap: var(--space-6); padding: var(--space-6); min-height: 100vh; box-sizing: border-box; }
+  .demo-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+  .demo-head h1 { margin: 0; }
+  .demo-section { display: flex; flex-direction: column; gap: var(--space-2); }
+  .demo-section h2 { margin: 0; }
+</style>
+</head>
+<body class="edl-root">
+<main class="demo">
+  <header class="demo-head">
+    <h1 class="edl-type-display">EDL GUI components</h1>
+    <button class="edl-btn" type="button" id="theme">Switch to Board (light)</button>
+  </header>
+  <section class="demo-section">
+    <h2 class="edl-label">Button</h2>
+<div style="padding:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+<button class="edl-btn edl-btn--primary" type="button">Flash firmware</button>
+<button class="edl-btn" type="button">Dump GPT</button>
+<button class="edl-btn edl-btn--danger" type="button">Erase userdata</button>
+<button class="edl-btn" type="button" disabled>Read partition</button>
+</div>
+  </section>
+  <section class="demo-section">
+    <h2 class="edl-label">Field</h2>
+<div style="padding:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+<div class="edl-field" style="flex:1 1 260px">
+  <label class="edl-label" for="f-loader">Firehose loader</label>
+  <input class="edl-input" id="f-loader" value="prog_firehose_ddr.elf">
+  <span class="edl-hint">Hardware ID 0x000a50e1 · PK hash 7be49b72…</span>
+</div>
+<div class="edl-field" style="flex:0 1 120px">
+  <label class="edl-label" for="f-lun">LUN</label>
+  <select class="edl-input" id="f-lun"><option>0</option><option>1</option><option>4</option></select>
+</div>
+<div class="edl-field" style="flex:1 1 200px">
+  <label class="edl-label" for="f-start">Start sector</label>
+  <input class="edl-input" id="f-start" value="0x1f4000" aria-invalid="true">
+  <span class="edl-hint edl-hint--fault">Past the end of LUN 0 (last sector 0x1d1fff).</span>
+</div>
+</div>
+  </section>
+  <section class="demo-section">
+    <h2 class="edl-label">StatusChip</h2>
+<div style="padding:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+<span class="edl-chip">No device</span>
+<span class="edl-chip edl-chip--ok">EDL 9008</span>
+<span class="edl-chip edl-chip--ok">Firehose ready</span>
+<span class="edl-chip edl-chip--warn">Unsigned loader</span>
+<span class="edl-chip edl-chip--fault">Disconnected</span>
+</div>
+  </section>
+  <section class="demo-section">
+    <h2 class="edl-label">Panel</h2>
+<div style="padding:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+<section class="edl-panel" style="flex:1 1 320px">
+  <div class="edl-panel__head"><h3 class="edl-panel__title">Job</h3><span class="edl-chip">Idle</span></div>
+  <div class="edl-panel__body">Pick a partition and an action. The log below records every Sahara and Firehose exchange.</div>
+</section>
+</div>
+  </section>
+  <section class="demo-section">
+    <h2 class="edl-label">DeviceCard</h2>
+<div style="padding:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+<section class="edl-panel" style="flex:1 1 360px">
+  <div class="edl-panel__head">
+    <h3 class="edl-panel__title">Device</h3>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="edl-chip edl-chip--ok">EDL 9008</span><span class="edl-chip edl-chip--ok">Firehose ready</span></div>
+  </div>
+  <div class="edl-panel__body">
+    <dl class="edl-kv">
+      <dt>Serial</dt><dd>0x7c3a91e2</dd>
+      <dt>Hardware ID</dt><dd>0x000a50e100000000</dd>
+      <dt>PK hash</dt><dd>7be49b72f9e43293…c1d8</dd>
+      <dt>Sahara</dt><dd>v3 (min v1)</dd>
+      <dt>Storage</dt><dd>UFS · 6 LUNs · 4096 B sectors</dd>
+      <dt>Loader</dt><dd>prog_firehose_ddr.elf</dd>
+    </dl>
+  </div>
+</section>
+</div>
+  </section>
+  <section class="demo-section">
+    <h2 class="edl-label">PartitionTable</h2>
+<div style="padding:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+<div class="edl-panel" style="flex:1 1 520px">
+  <div class="edl-panel__head"><h3 class="edl-panel__title">Partitions · LUN 0</h3><span class="edl-chip">32 entries</span></div>
+  <div class="edl-table-wrap">
+  <table class="edl-table">
+    <thead><tr><th>Name</th><th class="num">Start</th><th class="num">Sectors</th><th class="num">Size</th><th>Flags</th></tr></thead>
+    <tbody>
+      <tr><td>ssd</td><td class="num">0x6</td><td class="num">2</td><td class="num">8 KiB</td><td></td></tr>
+      <tr><td>persist</td><td class="num">0x8</td><td class="num">8192</td><td class="num">32 MiB</td><td class="protected">protected</td></tr>
+      <tr aria-selected="true"><td>boot_a</td><td class="num">0x6008</td><td class="num">24576</td><td class="num">96 MiB</td><td></td></tr>
+      <tr><td>boot_b</td><td class="num">0xc008</td><td class="num">24576</td><td class="num">96 MiB</td><td></td></tr>
+      <tr><td>userdata</td><td class="num">0x2a0008</td><td class="num">27852795</td><td class="num">106.2 GiB</td><td></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+</div>
+  </section>
+  <section class="demo-section">
+    <h2 class="edl-label">Progress</h2>
+<div style="padding:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+<div style="display:flex;flex-direction:column;gap:16px;flex:1 1 420px">
+  <div class="edl-progress">
+    <div class="edl-progress__meta"><span><strong>Writing boot_a</strong></span><span>61.4 / 96.0 MiB · 38.2 MiB/s</span></div>
+    <div class="edl-progress__track" role="progressbar" aria-valuenow="64"><div class="edl-progress__fill" style="width:64%"></div></div>
+  </div>
+  <div class="edl-progress edl-progress--ok">
+    <div class="edl-progress__meta"><span><strong>Verified dtbo_a</strong></span><span>24.0 / 24.0 MiB · SHA-256 match</span></div>
+    <div class="edl-progress__track" role="progressbar" aria-valuenow="100"><div class="edl-progress__fill" style="width:100%"></div></div>
+  </div>
+  <div class="edl-progress edl-progress--fault">
+    <div class="edl-progress__meta"><span><strong>Reading userdata failed</strong></span><span>2.1 / 106.2 GiB · USB disconnect</span></div>
+    <div class="edl-progress__track" role="progressbar" aria-valuenow="2"><div class="edl-progress__fill" style="width:2%"></div></div>
+  </div>
+</div>
+</div>
+  </section>
+  <section class="demo-section">
+    <h2 class="edl-label">LogConsole</h2>
+<div style="padding:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+<div class="edl-log" role="log" style="flex:1 1 520px"><span class="edl-log__line"><span>19:31:02</span><span class="edl-log__layer">usb</span><span>Found 05c6:9008 on port 1-2</span></span>
+<span class="edl-log__line"><span>19:31:02</span><span class="edl-log__layer">sahara</span><span>Hello v3, mode 0x0 (image transfer pending)</span></span>
+<span class="edl-log__line edl-log__line--ok"><span>19:31:04</span><span class="edl-log__layer">sahara</span><span>Loader uploaded: prog_firehose_ddr.elf (812 KiB)</span></span>
+<span class="edl-log__line"><span>19:31:05</span><span class="edl-log__layer">firehose</span><span>configure MemoryName=UFS MaxPayloadSizeToTargetInBytes=1048576</span></span>
+<span class="edl-log__line edl-log__line--warn"><span>19:31:05</span><span class="edl-log__layer">firehose</span><span>Target lowered payload size to 262144 bytes</span></span>
+<span class="edl-log__line edl-log__line--fault"><span>19:31:12</span><span class="edl-log__layer">firehose</span><span>NAK: Failed to authenticate digital signature</span></span></div>
+</div>
+  </section>
+  <section class="demo-section">
+    <h2 class="edl-label">ConfirmBar</h2>
+<div style="padding:16px;display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+<div class="edl-confirm" style="flex:1 1 520px">
+  <p class="edl-confirm__text" style="margin:0">Erase <code>userdata</code> on LUN 0 (106.2 GiB)? This wipes all user data on the device.</p>
+  <div class="edl-confirm__actions">
+    <button class="edl-btn" type="button">Cancel</button>
+    <button class="edl-btn edl-btn--danger edl-btn--solid" type="button">Erase userdata</button>
+  </div>
+</div>
+</div>
+  </section>
+</main>
+<script>
+  const btn = document.getElementById('theme');
+  const root = document.documentElement;
+  const isLight = () => root.dataset.theme ? root.dataset.theme === 'board' : matchMedia('(prefers-color-scheme: light)').matches;
+  const label = () => { btn.textContent = isLight() ? 'Switch to Bench (dark)' : 'Switch to Board (light)'; };
+  btn.addEventListener('click', () => { root.dataset.theme = isLight() ? 'bench' : 'board'; label(); });
+  label();
+</script>
+</body>
+</html>
